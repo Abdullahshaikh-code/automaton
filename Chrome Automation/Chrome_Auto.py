@@ -2,7 +2,6 @@ from selenium import webdriver
 import os
 import time
 
-service = './chromedriver-win64/chromedriver.exe'
 def profiles():
     chrome_user_data_dir = os.path.join(os.path.expanduser('~'), 'AppData', 'Local', 'Google', 'Chrome', 'User Data')
     profiles = [os.path.join(chrome_user_data_dir, profile) for profile in os.listdir(chrome_user_data_dir) if 'Profile' in profile]
@@ -19,7 +18,6 @@ def chromeAuto(selected_profiles):
         options = webdriver.ChromeOptions()
         options.add_argument("user-data-dir=" + profile,)
         options.add_argument("--disable-application-cache")
-        options.add_argument("--headless")  # Run in headless mode
         driver = webdriver.Chrome()
         time.sleep(5)
         driver.get('https://www.youtube.com/watch?v=6lrPSL7jHog')  
@@ -29,5 +27,6 @@ def chromeAuto(selected_profiles):
         if len(links) > 0:
             links[2].click()
         time.sleep(30)
-
         driver.quit()
+p=profiles()
+chromeAuto(p)
